@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :phone, presence: true
+  validates :tamanho_fralda, presence: true
 
   before_save :set_token_and_phone
   

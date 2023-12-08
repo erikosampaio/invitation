@@ -49,11 +49,12 @@ module SendMessage
     end
 
     def image_url
-      if @user.campo == "G"
-        "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+      if @user.tamanho_fralda == "M"
+        # Imagem do convite M
       else
-        "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+        # Imagem do convite G
       end
+      "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
     end
 
     def send_message(type, to, body_params)
