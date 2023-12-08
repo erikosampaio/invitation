@@ -1,0 +1,55 @@
+<%= form_with(url: create_response_invitation_users_path, method: :post, remote: true) do |form| %>
+  <div class="mb-3 form-group">
+    <%= form.label :telefone, "Telefone" %>
+    <%= form.text_field :telefone, id: "telefone", class: "form-control" %>
+    <span id="user-name" class="text-muted"></span>
+  </div>
+
+  <div class="mb-3 form-group">
+    <%= form.label :confirmacao, "Confirmar Presença" %>
+    <%= form.submit "Confirmar", class: "btn btn-success", id: "confirmar-presenca" %>
+  </div>
+
+  <div class="mb-3 form-group">
+    <%= form.label :declinacao, "Declinar do Convite" %>
+    <%= form.submit "Declinar", class: "btn btn-danger", id: "declinar-convite" %>
+  </div>
+
+  <%= form.button "Cancelar", type: :button, class: "btn btn-secondary", id: "cancelar" %>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const telefoneInput = document.getElementById("telefone");
+    const userNameSpan = document.getElementById("user-name");
+    const confirmarPresencaBtn = document.getElementById("confirmar-presenca");
+    const declinarConviteBtn = document.getElementById("declinar-convite");
+    const cancelarBtn = document.getElementById("cancelar");
+
+    telefoneInput.addEventListener("blur", function() {
+      const telefone = telefoneInput.value;
+
+      fetch(`/welcome/get_user_name?telefone=${telefone}`)
+        .then(response => response.json())
+        .then(data => {
+          userNameSpan.innerText = `Usuário encontrado: ${data.nome}`;
+        })
+        .catch(error => {
+          console.error("Erro ao obter o nome do usuário:", error);
+          userNameSpan.innerText = "";
+        });
+    });
+
+    confirmarPresencaBtn.addEventListener("click", function() {
+      alert("Presença Confirmada!");
+    });
+
+    declinarConviteBtn.addEventListener("click", function() {
+      alert("Convite Declinado!");
+    });
+
+    cancelarBtn.addEventListener("click", function() {
+      alert("Operação Cancelada!");
+    });
+  });
+</script>

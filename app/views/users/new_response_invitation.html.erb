@@ -1,0 +1,28 @@
+<%= form_with(url: create_response_invitation_users_path, method: :post, remote: true) do |form| %>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header"><strong>Confirmar Presença</strong></div>
+          <div class="card-body">
+            <form>
+              <div class="mb-3 form-group">
+                <%= form.label :telefone, "Telefone", class: "form-label" %>
+                <%= form.text_field :telefone, id: "telefone", class: "form-control", placeholder:"Insira seu telefone com DDD" %>
+              </div>
+
+              <div class="mb-3 form-group d-flex justify-content-between">
+                <%= form.submit "Confirmar", class: "btn btn-success btn-sm flex-grow-1 me-2", data: { disable_with: "Confirmando presença..." } %>
+                <%= form.submit "Declinar", class: "btn btn-danger btn-sm flex-grow-1 ms-2", data: { confirm: "Tem certeza que não pode ir?" } %>
+              </div>
+
+              <div class="mb-3 form-group text-center">
+                <%= link_to 'Cancelar', root_path, class: 'btn btn-secondary' %>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

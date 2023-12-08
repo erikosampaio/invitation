@@ -1,42 +1,66 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<style>
+  .form-group {
+    margin-bottom: 20px;
+  }
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="container mt-5">
+  <%= form_with(model: user) do |form| %>
+    <div class="form-group">
+      <%= form.label :name, 'Nome' %>
+      <%= form.text_field :name, class: 'form-control', maxlength: 50 %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :phone, 'Telefone' %>
+      <%= form.text_field :phone, class: 'form-control', maxlength: 15 %>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <%= form.check_box :confirmed, class: 'form-check-input' %>
+        <%= form.label :confirmed, 'Confirmado', class: 'form-check-label mr-2' %>
+      </div>
+
+      <div class="form-check">
+        <%= form.check_box :will_not, class: 'form-check-input' %>
+        <%= form.label 'Não vai', class: 'form-check-label' %>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <%= form.submit action(params[:action]), class: 'btn btn-primary', data: { disable_with: "Criando..." } %>
+      |
+      <%= link_to 'Cancelar', users_path, class: 'btn btn-danger' %>
     </div>
   <% end %>
+</div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div>
-    <%= form.label :token, style: "display: block" %>
-    <%= form.text_field :token %>
-  </div>
-
-  <div>
-    <%= form.label :confirmed, style: "display: block" %>
-    <%= form.check_box :confirmed %>
-  </div>
-
-  <div>
-    <%= form.label :answered, style: "display: block" %>
-    <%= form.text_field :answered %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+        checkboxes.forEach(function(otherCheckbox) {
+          if (otherCheckbox !== checkbox) {
+            otherCheckbox.checked = false;
+          }
+        });
+      });
+    });
+  });
+</script>

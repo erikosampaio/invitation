@@ -1,14 +1,84 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card bg-light mb-3">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="fas fa-users"></i> Quantidade de Convidados
+          </h4>
+          <h3 class="card-text"><%= @users.all.count %></h3>
+        </div>
+      </div>
+      <div class="card bg-light mb-3">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="fas fa-check-double"></i> Confirmados
+          </h4>
+          <h3 class="card-text"><%= @users.where(confirmed: true).count %></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card bg-light mb-3">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="fas fa-question"></i> Não Confirmados
+          </h4>
+          <h3 class="card-text"><%= @users.where(confirmed: false, answered: '0').count %></h3>
+        </div>
+      </div>
+      <div class="card bg-light mb-3">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="fas fa-users-slash"></i> Desistentes
+          </h4>
+          <h3 class="card-text"><%= @users.where(confirmed: false, answered: '2').count %></h3>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h1>Users</h1>
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-end text-right">
+      <%= link_to new_user_path, class: 'btn btn-success' do %>
+        <i class="fa fa-plus"></i> Criar Convidado
+      <% end %>
+    </div>
+  </div>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
+  <% if @users.any? %>
+    <table class="table table-bordered table-hover mt-4">
+      <thead class="table-dark">
+        <tr>
+          <th>Nome</th>
+          <th>Contato</th>
+          <th>Confirmou Presença?</th>
+          <th style="text-align:center;" colspan="2">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name.capitalize %></td>
+            <td><%= user.phone %></td>
+            <td><%= confirmed_presence?(user) %></td>
+            <td style="text-align: center;">
+              <a href="https://api.whatsapp.com/send?1=pt_BR&amp;phone=+55<%= user.phone %>&amp;text=<%= user.message %>" target="_blank">
+                <i class="fab fa-whatsapp" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enviar Convite digital"></i>
+              </a>
+            </td>
+            <td style="text-align: center;">
+              <%= link_to edit_user_path(user), class: 'btn btn-secondary btn-sm' do %>
+                <i class="fa fa-edit"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      Não há convidados cadastrados.
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New user", new_user_path %>
