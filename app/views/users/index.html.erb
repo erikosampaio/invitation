@@ -12,7 +12,7 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-check-double"></i> Confirmados
+            <i class="fas fa-check-double" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Quantidade Total: <%= @users.where(confirmed: true).sum(:qtd_guest) %>"></i> Confirmados
           </h4>
           <h3 class="card-text"><%= @users.where(confirmed: true).count %></h3>
         </div>
@@ -51,6 +51,9 @@
       <thead class="table-dark">
         <tr>
           <th>Nome</th>
+          <th style="text-align:center;">
+           Qtd <i class="fas fa-users" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Quantidade de convidados por pessoa"></i>
+          </th>
           <th>Contato</th>
           <th>Confirmou Presença?</th>
           <th style="text-align:center;">
@@ -62,9 +65,10 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.name.capitalize %></td>
-            <td><%= user.phone %></td>
-            <td><%= confirmed_presence?(user) %></td>
+            <td><%= user.name.capitalize rescue nil %></td>
+            <td style="text-align:center;"><%= user.qtd_guest rescue nil %></td>
+            <td><%= user.phone rescue nil %></td>
+            <td><%= confirmed_presence?(user) rescue nil %></td>
             <td style="text-align:center;"><%= user.tamanho_fralda rescue nil %></td>
             <td style="text-align: center;">
               <a href="https://api.whatsapp.com/send?1=pt_BR&amp;phone=+55<%= user.phone %>&amp;text=<%= user.message %>" target="_blank">

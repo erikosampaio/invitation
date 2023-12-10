@@ -3,17 +3,24 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header"><strong>Confirmar Presença</strong></div>
+          <div class="card-header">
+          <strong>Confirmar Presença</strong>
+          </div>
           <div class="card-body">
             <form>
               <div class="mb-3 form-group">
                 <%= form.label :telefone, "Telefone", class: "form-label" %>
-                <%= form.text_field :telefone, id: "telefone", class: "form-control", placeholder:"Insira seu telefone com DDD" %>
+                <%= form.number_field :telefone, id: "telefone", class: "form-control", placeholder:"Insira seu telefone com DDD", required:true %>
+              </div>
+
+              <div class="mb-3 form-group">
+                <%= form.label :qtd_guest, "Quantidade de convidados", class: "form-label" %>
+                <%= form.number_field :qtd_guest, class: "form-control", placeholder:"Quantos adultos incluindo você?", required:true %>
               </div>
 
               <div class="mb-3 form-group d-flex justify-content-between">
-                <%= form.submit "Confirmar", class: "btn btn-success btn-sm flex-grow-1 me-2", data: { disable_with: "Confirmando presença..." } %>
-                <%= form.submit "Declinar", class: "btn btn-danger btn-sm flex-grow-1 ms-2", data: { confirm: "Tem certeza que não pode ir?" } %>
+                <%= form.submit "Eu vou", class: "btn btn-success btn-sm flex-grow-1 me-2", data: { disable_with: "Confirmando presença..." } %>
+                <%= form.submit "Não posso ir", class: "btn btn-danger btn-sm flex-grow-1 ms-2", data: { confirm: "Tem certeza que não pode ir?" } %>
               </div>
 
               <div class="mb-3 form-group text-center">

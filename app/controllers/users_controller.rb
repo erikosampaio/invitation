@@ -83,7 +83,7 @@ class UsersController < ApplicationController
       return render :new_response_invitation
     end
 
-    if @user.present? && @user.confirmed == true && params[:commit].downcase == "confirmar"
+    if @user.present? && @user.confirmed == true && params[:commit].downcase == "eu vou"
       return redirect_to root_path, notice: "Você já confirmou sua presença."
     end
 
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     #   return render :new_response_invitation
     # end
     
-    if params[:commit].downcase == "declinar"
+    if params[:commit].downcase == "não posso ir"
       if @user.update(confirmed: false, answered: '2')
         # Chama serviço de whatsapp para enviar mensagem de despedida
         redirect_to root_path, notice: "Sentiremos sua falta em nossa comemoração. Se mudar de ideia é só confirmar o quanto antes."
@@ -100,8 +100,8 @@ class UsersController < ApplicationController
         flash.now['alert'] = @user.errors.full_messages.to_sentence
         render :new_response_invitation
       end
-    elsif params[:commit].downcase == "confirmar"
-      if @user.update(confirmed: true, answered: '1')
+    elsif params[:commit].downcase == "eu vou"
+      if @user.update(confirmed: true, answered: '1', qtd_guest: params[:qtd_guest])
         # Chama serviço de whatsapp para enviar mensagem de 
         redirect_to root_path, notice: "Sua presença foi confirmada. Estamos te esperando ansiosamente."
       else
@@ -123,6 +123,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda)
+    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda, :qtd_guest)
   end
 end

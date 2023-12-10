@@ -4,15 +4,14 @@ class User < ApplicationRecord
   validates :phone, presence: true
   validates :tamanho_fralda, presence: true
 
-  before_save :set_token_and_phone
+  before_save :set_token
   
   def message
     ::SendMessage::Whatsapp.new(self).message
   end
 
-  def set_token_and_phone
+  def set_token
     self.token = SecureRandom.hex(10)
-    self.phone = self.phone.gsub(/[^0-9]/, '')
   end
   
   # enum answered: {
