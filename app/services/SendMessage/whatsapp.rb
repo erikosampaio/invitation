@@ -9,7 +9,19 @@ module SendMessage
     end
 
     def message
-      "Olá #{@user.name.capitalize}, O teste deu certo viu!"
+      "Percebemos que ainda não confirmou sua presença. Precisamos da sua confirmação para organizar o evento.
+
+      Link de confirmação: #{root_url}
+
+      Esperamos te ver lá!
+
+      Atenciosamente,
+
+      Nayara e Ériko Sampaio."
+    end
+
+    def root_url
+      "https://invitation-2.fly.dev/"
     end
   end
 end

@@ -46,6 +46,17 @@ class UsersController < ApplicationController
   end
 
   def update
+    if params[:user][:confirmed] == '1'
+      @user.confirmed = true
+      @user.answered = '1'
+    elsif params[:user][:will_not] == '1'
+      @user.confirmed = false
+      @user.answered = '2'
+    else
+      @user.confirmed = false
+      @user.answered = '0'
+    end
+
     if @user.update(user_params)
       redirect_to users_url, notice: "Usuário atualizado com sucesso."
     else
@@ -112,6 +123,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :phone, :token, :confirmed)
+    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda)
   end
 end

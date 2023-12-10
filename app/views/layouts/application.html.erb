@@ -11,12 +11,12 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>  
   </head>
 
-  <body>
+  <body class="background-image">
     <div class="d-flex h-100 align-items-center justify-content-center row bg">
-      <main class="col-11 col-md-10 col-lg-8 shadow-lg p-5 mb-5 mycolor rounded">
+      <main class="background-none col-11 col-md-10 col-lg-8 shadow-lg p-5 mb-5 mycolor rounded">
         <% if params[:action] != 'edit' and params[:action] != 'new' and params[:action] != 'create' and params[:action] != 'update' %>
           <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
@@ -39,8 +39,7 @@
         <% flash.each do |type, message| %>
           <div class="alert alert-<%= type == 'alert' ? 'danger' : 'success' %> alert-dismissible fade show mt-2" role="alert">
             <%= message %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         <% end %>
 
@@ -65,10 +64,15 @@
     margin-right: 8px;
   }
 
-  .body {
-    background-image: url('assets/background.jpg');
+  .background-image {
+    background-image: url('/assets/ursinhos.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+
+  .background-none {
+    background-color: rgba(255, 255, 255, 0.8);
   }
 </style>

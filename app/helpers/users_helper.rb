@@ -3,10 +3,16 @@ module UsersHelper
     if user.answered == '0' and !user.confirmed.present?
       "Ainda não"
     elsif user.answered == '1' and user.confirmed.present?
-      "Confirmado"
+      "Sim"
     else
       "Não vai"
     end
+  end
+
+  def quantity_diapers(users)
+    m = users.where(tamanho_fralda: 'M').count
+    g = users.where(tamanho_fralda: 'G').count
+    return "#{m}M e #{g}G. Total: #{m + g}"
   end
 
   def action(action)

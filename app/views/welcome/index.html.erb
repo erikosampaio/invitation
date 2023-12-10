@@ -1,11 +1,13 @@
 <div class="container mt-5">
   <div class="card text-center">
     <div class="card-header">
-      <h1>Você é muito bem vindo aqui...</h1>
+      <h1>Você é muito especial pra nós...</h1>
     </div>
     <div class="card-body">
       <p class="card-text">Estamos felizes em convidá-lo para o evento especial do nosso Abner. Por favor, confirme sua presença abaixo.</p>
-      <%= link_to "Confirmar Presença", new_response_invitation_users_path, class: "btn btn-primary" %>
+      <%= link_to new_response_invitation_users_path, class: "btn btn-primary" do %>
+        Responder <i class="fas fa-share"></i>
+      <% end %>
     </div>
   </div>
 </div>

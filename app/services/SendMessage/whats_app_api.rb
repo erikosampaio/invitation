@@ -16,6 +16,10 @@ module SendMessage
       return_text_message = send_message('chat', phone_number, "body=#{body_message}")
       return_image_message = send_message('image', phone_number, "image=#{image_url}&caption=#{caption}")
 
+      if return_text_message['error'] && return_image_message['error']
+        return { 'error' => "Erro ao enviar convite digital. Erro: #{return_text_message['error']}" }
+      end
+      
       if return_text_message['error'] || return_image_message['error']
         if return_text_message['error']
           return { 'error' => "Imagem enviada com sucesso. Erro ao enviar mensagem de texto. Erro: #{return_text_message['error']}" }
@@ -41,7 +45,23 @@ module SendMessage
     end
 
     def body_message
-      "Você #{@user.name.capitalize}. O teste deu certo viu!"
+      "Oi #{@user.name.capitalize},
+
+      Gostaríamos de convidar você para o chá de fraldas do nosso bebê Abner. O evento será no dia 13/01/2023, a partir das 17h. Sua presença é muito importante para nós.
+
+      Mesmo que não possa comparecer, agradecemos se puder confirmar sua resposta no link abaixo. Isso nos ajudará na organização do evento.
+
+      Link de confirmação: #{root_url}
+
+      Esperamos vê-lo lá!
+
+      Atenciosamente,
+
+      Nayara e Ériko Sampaio."
+    end
+
+    def root_url
+      "https://invitation-2.fly.dev/"
     end
 
     def caption
@@ -50,11 +70,10 @@ module SendMessage
 
     def image_url
       if @user.tamanho_fralda == "M"
-        # Imagem do convite M
+        root_url + "assets/convite_m.png"
       else
-        # Imagem do convite G
+        root_url + "assets/convite_g.png"
       end
-      "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
     end
 
     def send_message(type, to, body_params)
