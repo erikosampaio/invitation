@@ -71,22 +71,8 @@ class UsersController < ApplicationController
   end
 
   def create_response_invitation
-    if params[:telefone] == nil || params[:telefone] == ""
-      flash.now[:alert] = "Telefone não pode ser vazio."
-      render :new_response_invitation
-      return
-    end
-
-    @user = User.find_by(phone: params[:telefone])
-    if @user == nil
-      flash.now[:alert] = "Usuário não encontrado pelo telefone. Tente novamente."
-      return render :new_response_invitation
-    end
-
-    if @user.present? && @user.confirmed == true && params[:commit].downcase == "eu vou"
-      return redirect_to root_path, notice: "Você já confirmou sua presença."
-    end
-
+    @user = User.where(token: params[:token]).first
+    
     if params[:commit].downcase == "não posso ir"
       if @user.update(confirmed: false, answered: '2')
         redirect_to root_path, notice: "Sentiremos sua falta em nossa comemoração. Se mudar de ideia é só confirmar o quanto antes."

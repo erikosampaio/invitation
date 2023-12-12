@@ -4,7 +4,7 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-users"></i> Quantidade de Convidados
+            <i class="fas fa-users"></i> Convidados Cadastrados
           </h4>
           <h3 class="card-text"><%= @users.all.count %></h3>
         </div>
@@ -12,9 +12,9 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-check-double" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Quantidade Total: <%= @users.where(confirmed: true).sum(:qtd_guest) %>"></i> Confirmados
+            <i class="fas fa-check-double"></i> Confirmados
           </h4>
-          <h3 class="card-text"><%= @users.where(confirmed: true).count %></h3>
+          <h3 class="card-text"><%= @users.where(confirmed: true).sum(:qtd_guest) %></h3>
         </div>
       </div>
     </div>
@@ -65,9 +65,9 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.name.capitalize rescue nil %></td>
+            <td><%= user.name.capitalize.titleize rescue nil %></td>
             <td style="text-align:center;"><%= user.qtd_guest rescue nil %></td>
-            <td><%= user.phone rescue nil %></td>
+            <td><%= user.format_phone rescue nil %></td>
             <td><%= confirmed_presence?(user) rescue nil %></td>
             <td style="text-align:center;"><%= user.tamanho_fralda rescue nil %></td>
             <td style="text-align: center;">

@@ -45,8 +45,8 @@ module SendMessage
     end
 
     def body_message
-      <<-MSG
-      Oi #{@user.name.capitalize},
+      <<~MSG
+      Oi #{@user.name.capitalize.titleize},
 
       Gostaríamos de convidar você para o chá de fraldas do nosso bebê Abner. O evento será no dia 13/01/2023, a partir das 17h. Sua presença é muito importante para nós.
 
@@ -54,16 +54,15 @@ module SendMessage
 
       Link de confirmação: #{invite_url}
 
-      *Sugestão de fraldas: Huggies Pacote Vermelho, Pampers, Pompom, Mamypoko, Milly e Needs.*
-          
-      *Sugestão de mimos: Kit de higiene, roupinhas, meias coloridas, mantas e cobertores, cesta de banho etc.*
+      **Sugestão de fraldas:** Huggies Pacote Vermelho, Pampers, Pompom, Mamypoko, Milly e Needs.
+      
+      **Sugestão de mimos:** Kit de higiene, roupinhas, meias coloridas, mantas e cobertores, cesta de banho etc.
 
-      Esperamos vê-lo lá!
+      Até breve!
 
       Atenciosamente,
-
       Nayara e Ériko Sampaio.
-      MSG
+    MSG
     end
 
     def root_url
