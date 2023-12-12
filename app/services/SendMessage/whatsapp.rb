@@ -9,15 +9,18 @@ module SendMessage
     end
 
     def message
-      "Percebemos que ainda não confirmou sua presença. Precisamos da sua confirmação para organizar o evento.
+      <<~MSG
+      Percebemos que ainda não confirmou sua presença. 
 
-      Link de confirmação: #{invite_url}
+      Link de confirmação: #{invite_url}. 
 
-      Esperamos te ver lá!
+      São dois cliques e pronto. 
+      
+      Esperamos te ver lá! 
 
-      Atenciosamente,
-
+      Atenciosamente, 
       Nayara e Ériko Sampaio."
+    MSG
     end
 
     private
