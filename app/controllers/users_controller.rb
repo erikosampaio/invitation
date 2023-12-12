@@ -112,6 +112,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda, :qtd_guest)
+    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda, :qtd_guest, :responsavel)
   end
 end
