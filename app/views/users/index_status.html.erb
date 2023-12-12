@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <% if @user.any? %>
+    <% if @confirmations.present? %>
+      <%= render 'confirmations', users: @confirmations %>
+    <% end %>
+    <br>
+
+    <hr>
+    <% if @not_confirmations.present? %>
+      <%= render 'not_confirmations', users: @not_confirmations %>
+    <% end %>
+    <br>
+
+    <hr>
+    <% if @will_not.present? %>
+      <%= render 'will_not', users: @will_not %>
+    <% end %>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      Não há convidados cadastrados.
+    </div>
+  <% end %>
+</div>

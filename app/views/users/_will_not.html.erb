@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-center">Desistências</h1>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover mt-4">
+  <thead class="table-dark">
+    <tr>
+      <th>Nome</th>
+      <th style="text-align:center;">
+        <i class="fas fa-baby" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<%= quantity_diapers(@will_not) %>"></i>
+      </th>
+      <th style="text-align:center;">
+        Qtd <i class="fas fa-users" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Quantidade de convidados por pessoa"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @will_not.each do |user| %>
+      <tr>
+        <td><%= user.name.capitalize.titleize rescue nil %></td>
+        <td style="text-align:center;"><%= user.tamanho_fralda rescue nil %></td>
+        <td style="text-align:center;"><%= user.qtd_guest rescue nil %></td>
+      </tr>
+    <% end %>
+    <% if @will_not.sum(:qtd_guest) > 0 %>
+      <td style="text-align:center;" colspan="2"><b>Total</b></td>
+      <td style="text-align:center;"><b><%= @will_not.sum(:qtd_guest) %></b></td>
+    <% end %>
+  </tbody>
+</table>

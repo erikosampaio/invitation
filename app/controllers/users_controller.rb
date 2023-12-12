@@ -6,6 +6,13 @@ class UsersController < ApplicationController
     @users = User.all.order(:name).order(:confirmed)
   end
 
+  def index_status
+    @user = User.all.order(:name).order(:confirmed)
+    @confirmations = User.where(confirmed: true, answered: '1').order(:name)
+    @not_confirmations = User.where(confirmed: false, answered: '0').order(:name)
+    @will_not = User.where(confirmed: false, answered: '2').order(:name)
+  end
+
   def new
     @user = User.new
   end

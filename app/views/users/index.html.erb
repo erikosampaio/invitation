@@ -4,7 +4,7 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-users"></i> Convidados Cadastrados
+            <i class="fas fa-users"></i> Cadastros
           </h4>
           <h3 class="card-text"><%= @users.all.count %></h3>
         </div>
@@ -12,7 +12,7 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-check-double"></i> Confirmados
+            <i class="fas fa-check-double"></i> Confirmações
           </h4>
           <h3 class="card-text"><%= @users.where(confirmed: true).sum(:qtd_guest) %></h3>
         </div>
@@ -22,7 +22,7 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-question"></i> Não Confirmados
+            <i class="fas fa-question"></i> Não Confirmações
           </h4>
           <h3 class="card-text"><%= @users.where(confirmed: false, answered: '0').count %></h3>
         </div>
@@ -30,7 +30,7 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-users-slash"></i> Desistentes
+            <i class="fas fa-users-slash"></i> Desistências
           </h4>
           <h3 class="card-text"><%= @users.where(confirmed: false, answered: '2').count %></h3>
         </div>
