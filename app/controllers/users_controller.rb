@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  http_basic_authenticate_with name: "sampaio", password: "abnerprincipe", only: %i[ index new edit create update destroy]
+  http_basic_authenticate_with name: "sampaio", password: "abnerprincipe", only: %i[ index index_status new edit create update destroy]
   before_action :set_user, only: %i[ edit update destroy ]
 
   def index
