@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'users#index'
+  root to: 'welcome#index'
 
   resources :users, except: [:show] do
     collection do

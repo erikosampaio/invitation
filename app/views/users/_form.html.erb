@@ -34,6 +34,13 @@
       <%= form.select :tamanho_fralda, ['M', 'G'], { prompt: 'Selecione um tamanho' }, class: 'form-control', required:true %>
     </div>
 
+    <% if params[:action] == 'edit' || params[:action] == 'update' %>
+      <div class="mb-3 form-group">
+        <%= form.label :qtd_guest, "Quantidade de convidados", class: "form-label" %>
+        <%= form.number_field :qtd_guest, class: "form-control", placeholder:"Quantos adultos incluindo convidado?", required:true %>
+      </div>
+    <% end %>
+
     <div class="form-group">
       <div class="form-check">
         <%= form.check_box :confirmed, class: 'form-check-input', checked: user.confirmed ? true : false %>

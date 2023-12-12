@@ -54,9 +54,9 @@ module SendMessage
 
       Link de confirmação: #{invite_url}
 
-      **Sugestão de fraldas:** Huggies Pacote Vermelho, Pampers, Pompom, Mamypoko, Milly e Needs.
+      *Sugestão de fraldas:* _Huggies Pacote Vermelho, Pampers, Pompom, Mamypoko, Milly e Needs._
       
-      **Sugestão de mimos:** Kit de higiene, roupinhas, meias coloridas, mantas e cobertores, cesta de banho etc.
+      *Sugestão de mimos:* _Kit de higiene, roupinhas, meias coloridas, mantas e cobertores, cesta de banho etc._
 
       Até breve!
 
