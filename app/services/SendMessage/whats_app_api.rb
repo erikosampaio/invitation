@@ -80,9 +80,9 @@ module SendMessage
 
     def image_url
       if @user.tamanho_fralda == "M"
-        root_url + "assets/convite_m.jpg"
+        "https://uploaddeimagens.com.br/images/004/688/522/original/convite_m.jpg?1702348258"
       else
-        root_url + "assets/convite_g.jpg"
+        "https://uploaddeimagens.com.br/images/004/688/523/original/convite_g.jpg?1702348290"
       end
     end
 

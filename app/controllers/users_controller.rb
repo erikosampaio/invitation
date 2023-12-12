@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  http_basic_authenticate_with name: "sampaio", password: "abnerprincipe", except: [:create_response_invitation, :new_response_invitation]
+  http_basic_authenticate_with name: "sampaio", password: "abnerprincipe", only: %i[ index new edit create update destroy]
   before_action :set_user, only: %i[ edit update destroy ]
 
   def index
