@@ -11,7 +11,7 @@ module SendMessage
     def message
       "Percebemos que ainda não confirmou sua presença. Precisamos da sua confirmação para organizar o evento.
 
-      Link de confirmação: #{root_url}
+      Link de confirmação: #{invite_url}
 
       Esperamos te ver lá!
 
@@ -20,8 +20,13 @@ module SendMessage
       Nayara e Ériko Sampaio."
     end
 
+    private
     def root_url
       "https://invitation-2.fly.dev/"
+    end
+
+    def invite_url
+      "https://invitation-2.fly.dev/users/new_response_invitation?token=#{@user.token}"
     end
   end
 end

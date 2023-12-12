@@ -45,23 +45,33 @@ module SendMessage
     end
 
     def body_message
-      "Oi #{@user.name.capitalize},
+      <<-MSG
+      Oi #{@user.name.capitalize},
 
       Gostaríamos de convidar você para o chá de fraldas do nosso bebê Abner. O evento será no dia 13/01/2023, a partir das 17h. Sua presença é muito importante para nós.
 
       Mesmo que não possa comparecer, agradecemos se puder confirmar sua resposta no link abaixo. Isso nos ajudará na organização do evento.
 
-      Link de confirmação: #{root_url}
+      Link de confirmação: #{invite_url}
+
+      *Sugestão de fraldas: Huggies Pacote Vermelho, Pampers, Pompom, Mamypoko, Milly e Needs.*
+          
+      *Sugestão de mimos: Kit de higiene, roupinhas, meias coloridas, mantas e cobertores, cesta de banho etc.*
 
       Esperamos vê-lo lá!
 
       Atenciosamente,
 
-      Nayara e Ériko Sampaio."
+      Nayara e Ériko Sampaio.
+      MSG
     end
 
     def root_url
       "https://invitation-2.fly.dev/"
+    end
+
+    def invite_url
+      "https://invitation-2.fly.dev/users/new_response_invitation?token=#{@user.token}"
     end
 
     def caption
@@ -70,9 +80,9 @@ module SendMessage
 
     def image_url
       if @user.tamanho_fralda == "M"
-        root_url + "assets/convite_m.png"
+        root_url + "assets/convite_m.jpg"
       else
-        root_url + "assets/convite_g.png"
+        root_url + "assets/convite_g.jpg"
       end
     end
 

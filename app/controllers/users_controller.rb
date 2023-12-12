@@ -87,14 +87,8 @@ class UsersController < ApplicationController
       return redirect_to root_path, notice: "Você já confirmou sua presença."
     end
 
-    # if @user.token != params[:token]
-    #   flash.now[:alert] = "Insira o token válido."
-    #   return render :new_response_invitation
-    # end
-    
     if params[:commit].downcase == "não posso ir"
       if @user.update(confirmed: false, answered: '2')
-        # Chama serviço de whatsapp para enviar mensagem de despedida
         redirect_to root_path, notice: "Sentiremos sua falta em nossa comemoração. Se mudar de ideia é só confirmar o quanto antes."
       else
         flash.now['alert'] = @user.errors.full_messages.to_sentence
@@ -102,7 +96,6 @@ class UsersController < ApplicationController
       end
     elsif params[:commit].downcase == "eu vou"
       if @user.update(confirmed: true, answered: '1', qtd_guest: params[:qtd_guest])
-        # Chama serviço de whatsapp para enviar mensagem de 
         redirect_to root_path, notice: "Sua presença foi confirmada. Estamos te esperando ansiosamente."
       else
         flash.now['alert'] = @user.errors.full_messages.to_sentence
@@ -114,7 +107,10 @@ class UsersController < ApplicationController
   end
 
   def new_response_invitation
-    @user = User.new
+    @user = User.where(token: params[:token]).first
+    if @user == nil
+      redirect_to root_path, alert: "Erro ao validar token. Fale com os pais do Abner para resolver esse problema."
+    end
   end
 
   private
