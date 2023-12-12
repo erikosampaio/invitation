@@ -79,9 +79,9 @@ module SendMessage
 
     def image_url
       if @user.tamanho_fralda == "M"
-        "https://uploaddeimagens.com.br/images/004/688/522/original/convite_m.jpg?1702348258"
+        "https://uploaddeimagens.com.br/images/004/688/621/original/convite_m.jpg?1702381924"
       else
-        "https://uploaddeimagens.com.br/images/004/688/523/original/convite_g.jpg?1702348290"
+        "https://uploaddeimagens.com.br/images/004/688/624/original/convite_g.jpg?1702382005"
       end
     end
 
