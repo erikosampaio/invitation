@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="text-center"><%= title %></h1>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover mt-4">
+  <thead class="table-dark">
+    <tr>
+      <th>Nome</th>
+      <th style="text-align:center;">
+        <i class="fas fa-baby" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<%= quantity_diapers(users) %>"></i>
+      </th>
+      <% if params[:action] == "index_anfitriao" %>
+        <th>Confirmou Presença?</th>
+      <% end %>
+      <th style="text-align:center;">
+        Qtd <i class="fas fa-users" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Quantidade de convidados por pessoa"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td><%= user.name.capitalize.titleize rescue nil %></td>
+        <td style="text-align:center;"><%= user.tamanho_fralda rescue nil %></td>
+        <% if params[:action] == "index_anfitriao" %>
+          <td style="text-align:center;"><%= confirmed_presence?(user) rescue nil %></td>
+        <% end %>
+        <td style="text-align:center;"><%= verify_invited(user) rescue nil %></td>
+      </tr>
+    <% end %>
+    <% if users.sum(:qtd_guest) > 0 %>
+      <td style="text-align:center;" colspan="<%= params[:action] == "index_anfitriao" ? 3 : 2 %>"><b>Total</b></td>
+      <td style="text-align:center;"><b><%= users.sum(:qtd_guest) %></b></td>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <% if @users.any? %>
+    <% if @invites_eriko.any? %>
+      <hr>
+      <%= render 'index_filtered', users: @invites_eriko, title: 'Convidados do Ériko' %>
+      <br>
+    <% end %>
+    
+    <% if @invites_nayara.any? %>
+      <hr>
+      <%= render 'index_filtered', users: @invites_nayara, title: 'Convidados da Nayara' %>
+      <br>
+    <% end %>
+
+    <% if @invites_both.any? %>
+      <hr>
+      <%= render 'index_filtered', users: @invites_both, title: 'Convidados de Ambos' %>
+      <br>
+    <% end %>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      Não há convidados cadastrados.
+    </div>
+  <% end %>
+</div>

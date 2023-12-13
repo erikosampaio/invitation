@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   resources :users, except: [:show] do
     collection do
-      get 'index_status',                to:'users#index_status'
-      get 'new_response_invitation',     to:'users#new_response_invitation'
+      get 'index_status',                to: 'users#index_status'
+      get 'index_anfitriao',             to: 'users#index_anfitriao'
+      get 'new_response_invitation',     to: 'users#new_response_invitation'
       post 'create_response_invitation', to: 'users#create_response_invitation'
     end
   end

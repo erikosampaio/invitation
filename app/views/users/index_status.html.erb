@@ -1,19 +1,21 @@
 <div class="container mt-5">
-  <% if @user.any? %>
-    <% if @confirmations.present? %>
-      <%= render 'confirmations', users: @confirmations %>
+  <% if @users.any? %>
+    <% if @confirmations.any? %>
+      <hr>
+      <%= render 'index_filtered', users: @confirmations, title: 'Confirmações' %>
       <br>
     <% end %>
     
-    <% if @not_confirmations.present? %>
+    <% if @not_confirmations.any? %>
       <hr>
-      <%= render 'not_confirmations', users: @not_confirmations %>
+      <%= render 'index_filtered', users: @not_confirmations, title: 'Não Confirmações' %>
       <br>
     <% end %>
 
-    <% if @will_not.present? %>
+    <% if @will_not.any? %>
       <hr>
-      <%= render 'will_not', users: @will_not %>
+      <%= render 'index_filtered', users: @will_not, title: 'Desistências' %>
+      <br>
     <% end %>
   <% else %>
     <div class="alert alert-warning" role="alert">

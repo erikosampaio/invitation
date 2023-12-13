@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  http_basic_authenticate_with name: "sampaio", password: "abnerprincipe", only: %i[ index index_status new edit create update destroy]
+  http_basic_authenticate_with name: "sampaio", password: "abnerprincipe", only: %i[ index index_status index_anfitriao new edit create update destroy]
   before_action :set_user, only: %i[ edit update destroy ]
 
   def index
@@ -7,10 +7,17 @@ class UsersController < ApplicationController
   end
 
   def index_status
-    @user = User.all.order(:name).order(:confirmed)
-    @confirmations = User.where(confirmed: true, answered: '1').order(:name)
+    @users             = User.all.order(:name).order(:confirmed)
+    @confirmations     = User.where(confirmed: true, answered: '1').order(:name)
     @not_confirmations = User.where(confirmed: false, answered: '0').order(:name)
-    @will_not = User.where(confirmed: false, answered: '2').order(:name)
+    @will_not          = User.where(confirmed: false, answered: '2').order(:name)
+  end
+
+  def index_anfitriao
+    @users          = User.all.order(:name).order(:confirmed)
+    @invites_eriko  = User.where(responsavel: 'Ériko').order(:confirmed).order(:answered).order(:name)
+    @invites_nayara = User.where(responsavel: 'Nayara').order(:confirmed).order(:answered).order(:name)
+    @invites_both   = User.where(responsavel: 'Ambos').order(:confirmed).order(:answered).order(:name)
   end
 
   def new
