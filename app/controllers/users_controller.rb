@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    puts "Token do #{@user.name}: #{@user.token}"
   end
 
   def create
