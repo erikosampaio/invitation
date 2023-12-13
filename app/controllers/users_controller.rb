@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ edit update destroy ]
 
   def index
-    @users = User.all.order(:name).order(:confirmed)
+    @users = User.all.order(:confirmed).order(:answered).order(:name)
   end
 
   def index_status

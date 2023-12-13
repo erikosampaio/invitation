@@ -30,9 +30,9 @@
         <td style="text-align:center;"><%= verify_invited(user) rescue nil %></td>
       </tr>
     <% end %>
-    <% if users.sum(:qtd_guest) > 0 %>
+    <% if users.sum(:qtd_expected) > 0 %>
       <td style="text-align:center;" colspan="<%= params[:action] == "index_anfitriao" ? 3 : 2 %>"><b>Total</b></td>
-      <td style="text-align:center;"><b><%= users.sum(:qtd_guest) %></b></td>
+      <td style="text-align:center;"><b><%= users.sum(:qtd_expected) %></b></td>
     <% end %>
   </tbody>
 </table>
