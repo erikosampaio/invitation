@@ -100,8 +100,12 @@ class UsersController < ApplicationController
   end
 
   def new_response_invitation
+    while params[:token] == "[FILTERED]"
+      params[:token] = params[:token]
+    end
+      
     @user = User.where(token: params[:token]).first
-    if @user == nil
+    if @user.nil?
       redirect_to root_path, alert: "Erro ao validar token. Fale com os pais do Abner para resolver esse problema."
     end
   end
