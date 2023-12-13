@@ -4,9 +4,9 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-users"></i> Cadastros/Previsão
+            <i class="fas fa-users"></i> Cadastrados / Previsão
           </h4>
-          <h3 class="card-text"><%= @users.all.count %>/<%= @users.sum(:qtd_expected) rescue nil %></h3>
+          <h3 class="card-text"><%= @users.all.count %> / <%= @users.where.not(answered: 2).sum(:qtd_expected) rescue nil %></h3>
         </div>
       </div>
       <div class="card bg-light mb-3">
@@ -14,7 +14,7 @@
           <h4 class="card-title">
             <i class="fas fa-check-double"></i> Confirmações
           </h4>
-          <h3 class="card-text"><%= @users.where(confirmed: true).sum(:qtd_guest) %></h3>
+          <h3 class="card-text"><%= @users.where(confirmed: true).sum(:qtd_guest) rescue nil %></h3>
         </div>
       </div>
     </div>
@@ -22,17 +22,17 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-question"></i> Não Confirmações
+            <i class="fas fa-question"></i> Não Confirmações / Por Cadastro
           </h4>
-          <h3 class="card-text"><%= @users.where(confirmed: false, answered: '0').count %></h3>
+          <h3 class="card-text"><%= @users.where(confirmed: false, answered: '0').sum(:qtd_expected) rescue nil %> / <%= @users.where(confirmed: false, answered: '0').count rescue nil %></h3></h3>
         </div>
       </div>
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-users-slash"></i> Desistências
+            <i class="fas fa-users-slash"></i> Desistências / Por Cadastro
           </h4>
-          <h3 class="card-text"><%= @users.where(confirmed: false, answered: '2').count %></h3>
+          <h3 class="card-text"><%= @users.where(confirmed: false, answered: '2').sum(:qtd_expected) rescue nil %> / <%= @users.where(confirmed: false, answered: '2').count rescue nil %></h3>
         </div>
       </div>
     </div>
@@ -50,6 +50,7 @@
     <table class="table table-bordered table-hover mt-4">
       <thead class="table-dark">
         <tr>
+          <th>#</th>
           <th>Nome</th>
           <th style="text-align:center;">
            Qtd <i class="fas fa-users" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Quantidade de convidados por pessoa"></i>
@@ -65,6 +66,7 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
+            <th><%= @contador += 1 rescue nil %></th>
             <td><%= user.name.titleize rescue nil %></td>
             <td style="text-align:center;"><%= verify_invited(user) rescue nil %></td>
             <td><%= user.format_phone rescue nil %></td>

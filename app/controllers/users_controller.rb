@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ edit update destroy ]
 
   def index
-    @users = User.all.order(:confirmed).order(:answered).order(:name)
+    @users = User.all.order(confirmed: :desc).order(:answered).order(:name)
+    @contador = 0
   end
 
   def index_status
@@ -11,13 +12,15 @@ class UsersController < ApplicationController
     @confirmations     = User.where(confirmed: true, answered: '1').order(:name)
     @not_confirmations = User.where(confirmed: false, answered: '0').order(:name)
     @will_not          = User.where(confirmed: false, answered: '2').order(:name)
+    @contador = 0
   end
 
   def index_anfitriao
     @users          = User.all.order(:name).order(:confirmed)
-    @invites_eriko  = User.where(responsavel: 'Ériko').order(:confirmed).order(:answered).order(:name)
-    @invites_nayara = User.where(responsavel: 'Nayara').order(:confirmed).order(:answered).order(:name)
-    @invites_both   = User.where(responsavel: 'Ambos').order(:confirmed).order(:answered).order(:name)
+    @invites_eriko  = User.where(responsavel: 'Ériko').order(confirmed: :desc).order(:answered).order(:name)
+    @invites_nayara = User.where(responsavel: 'Nayara').order(confirmed: :desc).order(:answered).order(:name)
+    @invites_both   = User.where(responsavel: 'Ambos').order(confirmed: :desc).order(:answered).order(:name)
+    @contador = 0
   end
 
   def new
@@ -90,7 +93,7 @@ class UsersController < ApplicationController
     @user = User.where(token: params[:token]).first
     
     if params[:commit].downcase == "não posso ir"
-      if @user.update(confirmed: false, answered: '2', qtd_guest: 0, qtd_expected: 0)
+      if @user.update(confirmed: false, answered: '2', qtd_guest: 0)
         redirect_to root_path, notice: "Sentiremos sua falta em nossa comemoração. Se mudar de ideia é só confirmar o quanto antes."
       else
         flash.now['alert'] = @user.errors.full_messages.to_sentence

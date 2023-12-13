@@ -7,6 +7,7 @@
 <table class="table table-bordered table-hover mt-4">
   <thead class="table-dark">
     <tr>
+      <th>#</th>
       <th>Nome</th>
       <th style="text-align:center;">
         <i class="fas fa-baby" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<%= quantity_diapers(users) %>"></i>
@@ -22,6 +23,7 @@
   <tbody>
     <% users.each do |user| %>
       <tr>
+        <th><%= @contador += 1 rescue nil %></th>
         <td><%= user.name.capitalize.titleize rescue nil %></td>
         <td style="text-align:center;"><%= user.tamanho_fralda rescue nil %></td>
         <% if params[:action] == "index_anfitriao" %>
@@ -31,7 +33,7 @@
       </tr>
     <% end %>
     <% if users.sum(:qtd_expected) > 0 %>
-      <td style="text-align:center;" colspan="<%= params[:action] == "index_anfitriao" ? 3 : 2 %>"><b>Total</b></td>
+      <td style="text-align:center;" colspan="<%= params[:action] == "index_anfitriao" ? 4 : 3 %>"><b>Total</b></td>
       <td style="text-align:center;"><b><%= users.sum(:qtd_expected) %></b></td>
     <% end %>
   </tbody>

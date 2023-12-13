@@ -10,9 +10,9 @@ module UsersHelper
   end
 
   def verify_invited(user)
-    if user.confirmed.present? || (!user.confirmed.present? && user.answered == '2')
+    if user.confirmed.present?
       user.qtd_guest
-    elsif !user.confirmed.present? && user.answered == '0'
+    else
       user.qtd_expected
     end
   end
