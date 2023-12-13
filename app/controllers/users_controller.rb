@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.token = SecureRandom.hex(5)
     
     if params[:user][:confirmed] == '1'
       @user.confirmed = true

@@ -6,14 +6,8 @@ class User < ApplicationRecord
   validates :responsavel, presence: true
   validates :qtd_guest, presence: true
 
-  before_save :set_token
-  
   def message
     ::SendMessage::Whatsapp.new(self).message
-  end
-
-  def set_token
-    self.token = SecureRandom.hex(10)
   end
 
   def format_phone

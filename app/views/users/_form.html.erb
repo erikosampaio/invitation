@@ -44,6 +44,11 @@
         <%= form.label :qtd_guest, "Quantidade de convidados (acima de 5 anos)", class: "form-label" %>
         <%= form.number_field :qtd_guest, class: "form-control", placeholder:"Quantas pessoas incluindo o convidado?", required:true %>
       </div>
+
+      <div class="mb-3 form-group">
+        <%= form.label :token, "Token", class: "form-label" %>
+        <%= form.text_field :token, class: "form-control", required:true %>
+      </div>
     <% end %>
 
     <div class="form-group">
