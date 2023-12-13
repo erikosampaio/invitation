@@ -100,7 +100,6 @@ class UsersController < ApplicationController
   end
 
   def new_response_invitation
-    Rails.application.config.filter_parameters = [/(?i:passw)|(?i:secret)|(?i:_key)|(?i:crypt)|(?i:salt)|(?i:certificate)|(?i:otp)|(?i:ssn)/]
     @user = User.where(token: params[:token]).first
     if @user.nil?
       redirect_to root_path, alert: "Erro ao validar token. Fale com os pais do Abner para resolver esse problema."
