@@ -9,6 +9,14 @@ module UsersHelper
     end
   end
 
+  def verify_invited(user)
+    if user.confirmed.present? || (!user.confirmed.present? && user.answered == '2')
+      user.qtd_guest
+    elsif !user.confirmed.present? && user.answered == '0'
+      user.qtd_expected
+    end
+  end
+
   def quantity_diapers(users)
     m = users.where(tamanho_fralda: 'M').count
     g = users.where(tamanho_fralda: 'G').count

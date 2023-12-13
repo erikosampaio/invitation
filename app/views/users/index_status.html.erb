@@ -2,17 +2,17 @@
   <% if @user.any? %>
     <% if @confirmations.present? %>
       <%= render 'confirmations', users: @confirmations %>
+      <br>
     <% end %>
-    <br>
-
-    <hr>
+    
     <% if @not_confirmations.present? %>
+      <hr>
       <%= render 'not_confirmations', users: @not_confirmations %>
+      <br>
     <% end %>
-    <br>
 
-    <hr>
     <% if @will_not.present? %>
+      <hr>
       <%= render 'will_not', users: @will_not %>
     <% end %>
   <% else %>

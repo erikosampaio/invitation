@@ -4,9 +4,9 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-users"></i> Cadastros
+            <i class="fas fa-users"></i> Cadastros/Previsão
           </h4>
-          <h3 class="card-text"><%= @users.all.count %></h3>
+          <h3 class="card-text"><%= @users.all.count %>/<%= @users.sum(:qtd_expected) rescue nil %></h3>
         </div>
       </div>
       <div class="card bg-light mb-3">
@@ -65,8 +65,8 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.name.capitalize.titleize rescue nil %></td>
-            <td style="text-align:center;"><%= user.qtd_guest rescue nil %></td>
+            <td><%= user.name.titleize rescue nil %></td>
+            <td style="text-align:center;"><%= verify_invited(user) rescue nil %></td>
             <td><%= user.format_phone rescue nil %></td>
             <td><%= confirmed_presence?(user) rescue nil %></td>
             <td style="text-align:center;"><%= user.tamanho_fralda rescue nil %></td>

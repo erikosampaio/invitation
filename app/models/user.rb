@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :tamanho_fralda, presence: true
   validates :responsavel, presence: true
   validates :qtd_guest, presence: true
+  validates :qtd_expected, presence: true
 
   def message
     ::SendMessage::Whatsapp.new(self).message

@@ -83,14 +83,14 @@ class UsersController < ApplicationController
     @user = User.where(token: params[:token]).first
     
     if params[:commit].downcase == "não posso ir"
-      if @user.update(confirmed: false, answered: '2')
+      if @user.update(confirmed: false, answered: '2', qtd_guest: 0, qtd_expected: 0)
         redirect_to root_path, notice: "Sentiremos sua falta em nossa comemoração. Se mudar de ideia é só confirmar o quanto antes."
       else
         flash.now['alert'] = @user.errors.full_messages.to_sentence
         render :new_response_invitation
       end
     elsif params[:commit].downcase == "eu vou"
-      if @user.update(confirmed: true, answered: '1', qtd_guest: params[:qtd_guest])
+      if @user.update(confirmed: true, answered: '1', qtd_guest: params[:qtd_guest], qtd_expected: params[:qtd_guest])
         redirect_to root_path, notice: "Sua presença foi confirmada. Estamos te esperando ansiosamente."
       else
         flash.now['alert'] = @user.errors.full_messages.to_sentence
@@ -114,6 +114,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda, :qtd_guest, :responsavel)
+    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda, :qtd_guest, :responsavel, :qtd_expected)
   end
 end
