@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :responsavel, presence: true
   validates :qtd_guest, presence: true
   validates :qtd_expected, presence: true
+  validates :send_qtd_expected, presence: true
 
   def message
     ::SendMessage::Whatsapp.new(self).message

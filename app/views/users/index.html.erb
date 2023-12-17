@@ -58,7 +58,7 @@
           <th>Contato</th>
           <th>Confirmou Presença?</th>
           <th style="text-align:center;">
-            <i class="fas fa-baby" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<%= quantity_diapers(@users) %>"></i>
+            <i class="fas fa-baby" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<%= quantity_diapers(@users.where(confirmed: true)) %>"></i>
           </th>
           <th style="text-align:center;" colspan="2">Ações</th>
         </tr>
