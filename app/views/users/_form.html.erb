@@ -41,7 +41,7 @@
 
     <div class="form-group">
       <%= form.label :qtd_expected, "Quantidade Esperado", class: "form-label" %>
-      <%= form.number_field :qtd_expected, class: "form-control", placeholder:"Quantidade esperado para esse convidado?", required:true %>
+      <%= form.number_field :qtd_expected, class: "form-control", min:"0", placeholder:"Quantidade esperado para esse convidado?", required:true %>
     </div>
 
     <div class="form-group">
@@ -52,7 +52,7 @@
     <% if params[:action] == 'edit' || params[:action] == 'update' %>
       <div class="mb-3 form-group">
         <%= form.label :qtd_guest, "Quantidade de Convidados (acima de 5 anos)", class: "form-label" %>
-        <%= form.number_field :qtd_guest, class: "form-control", placeholder:"Quantas pessoas incluindo o convidado?", required:true %>
+        <%= form.number_field :qtd_guest, class: "form-control", min: "0", placeholder:"Quantas pessoas incluindo o convidado?", required:true %>
       </div>
 
       <div class="mb-3 form-group">

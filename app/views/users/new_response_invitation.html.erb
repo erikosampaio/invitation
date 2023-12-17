@@ -21,7 +21,7 @@
               <% if @user.send_qtd_expected == "Sim" %>
                 <div class="mb-3 form-group">
                   <%= form.label :qtd_guest, "Quantidade de convidados (acima de 5 anos)", class: "form-label" %>
-                  <%= form.number_field :qtd_guest, class: "form-control", placeholder:"Quantas pessoas incluindo você?", required:true %>
+                  <%= form.number_field :qtd_guest, class: "form-control", min:"1", placeholder:"Quantas pessoas incluindo você?", required:true %>
                 </div>
               <% end %>
 
