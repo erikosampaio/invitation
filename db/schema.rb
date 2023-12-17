@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_13_031003) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_17_151555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_031003) do
     t.integer "qtd_guest", default: 1
     t.string "responsavel"
     t.integer "qtd_expected"
+    t.string "send_qtd_expected"
   end
 
 end

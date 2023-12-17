@@ -18,10 +18,12 @@
                 <%= form.text_field :phone, value: @user.format_phone, class: "form-control", readonly:true %>
               </div>
 
-              <div class="mb-3 form-group">
-                <%= form.label :qtd_guest, "Quantidade de convidados (acima de 5 anos)", class: "form-label" %>
-                <%= form.number_field :qtd_guest, class: "form-control", placeholder:"Quantas pessoas incluindo você?", required:true %>
-              </div>
+              <% if @user.send_qtd_expected == "Sim" %>
+                <div class="mb-3 form-group">
+                  <%= form.label :qtd_guest, "Quantidade de convidados (acima de 5 anos)", class: "form-label" %>
+                  <%= form.number_field :qtd_guest, class: "form-control", placeholder:"Quantas pessoas incluindo você?", required:true %>
+                </div>
+              <% end %>
 
               <div class="mb-3 form-group d-flex justify-content-between">
                 <%= form.submit "Eu vou", class: "btn btn-success btn-sm flex-grow-1 me-2", data: { disable_with: "Confirmando presença..." } %>

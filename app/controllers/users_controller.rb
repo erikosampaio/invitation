@@ -100,6 +100,7 @@ class UsersController < ApplicationController
         render :new_response_invitation
       end
     elsif params[:commit].downcase == "eu vou"
+      params[:qtd_guest] = @user.qtd_expected if params[:qtd_guest].nil?
       if @user.update(confirmed: true, answered: '1', qtd_guest: params[:qtd_guest], qtd_expected: params[:qtd_guest])
         redirect_to root_path, notice: "Sua presença foi confirmada. Estamos te esperando ansiosamente."
       else
@@ -124,6 +125,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda, :qtd_guest, :responsavel, :qtd_expected)
+    params.require(:user).permit(:name, :phone, :token, :confirmed, :tamanho_fralda, :qtd_guest, :responsavel, :qtd_expected, :send_qtd_expected)
   end
 end
