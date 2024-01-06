@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get 'index_anfitriao',             to: 'users#index_anfitriao'
       get 'new_response_invitation',     to: 'users#new_response_invitation'
       post 'create_response_invitation', to: 'users#create_response_invitation'
+      get 'resend_message',             to: 'users#resend_message'
     end
   end
 end

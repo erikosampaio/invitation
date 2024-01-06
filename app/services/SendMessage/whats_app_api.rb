@@ -30,6 +30,25 @@ module SendMessage
         return { 'success' => 'Usuário criado com sucesso. Convite digital enviado.' }
       end
     end
+
+    def resend_package_message
+      return_text_message = send_message('chat', phone_number, "body=#{body_resend_message}")
+      return_image_message = send_message('image', phone_number, "image=#{image_url}&caption=#{caption}")
+
+      if return_text_message['error'] && return_image_message['error']
+        return { 'error' => "Erro ao enviar convite digital. Erro: #{return_text_message['error']}" }
+      end
+      
+      if return_text_message['error'] || return_image_message['error']
+        if return_text_message['error']
+          return { 'error' => "Imagem enviada com sucesso. Erro ao enviar mensagem de texto. Erro: #{return_text_message['error']}" }
+        end
+        
+        return { 'error' => "Mensagem enviada com sucesso. Erro ao enviar imagem. Erro: #{return_image_message['error']}" }
+      else
+        return { 'success' => 'Usuário criado com sucesso. Convite digital enviado.' }
+      end
+    end
   
     def send_text_message
       send_message('chat', phone_number, "body=#{body_message}")
@@ -51,6 +70,27 @@ module SendMessage
       Gostaríamos de convidar você para o chá de fraldas do nosso bebê Abner. O evento será no dia 13/01/2023, a partir das 17h. Sua presença é muito importante para nós.
 
       Mesmo que não possa comparecer, agradecemos se puder confirmar sua resposta no link abaixo. Isso nos ajudará na organização do evento.
+
+      Link de confirmação: #{invite_url}
+
+      *Sugestão de fraldas:* _Huggies Pacote Vermelho, Pampers, Pompom, Mamypoko, Milly e Needs._
+      
+      *Sugestão de mimos:* _Kit de higiene, roupinhas, meias coloridas, mantas e cobertores, cesta de banho etc._
+
+      Até breve!
+
+      Atenciosamente,
+      Nayara e Ériko Sampaio.
+    MSG
+    end
+
+    def body_resend_message
+      <<~MSG
+      Oi #{@user.name.capitalize.titleize},
+
+      Percebemos que não confirmou ainda sua presença no chá de fralda do nosso Abner.
+
+      A confirmação pode ser feita até dia 08/01/2023 - 23:59h. Não deixa de nos responder. Agradecemos muito!
 
       Link de confirmação: #{invite_url}
 

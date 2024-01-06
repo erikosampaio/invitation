@@ -75,9 +75,9 @@
             <td class="d-none d-sm-table-cell"><%= user.responsavel.capitalize rescue nil %></td>
             <td class="d-none d-sm-table-cell" style="text-align:center;"><%= user.tamanho_fralda rescue nil %></td>
             <td style="text-align: center;">
-              <a href="https://api.whatsapp.com/send?1=pt_BR&amp;phone=+55<%= user.phone %>&amp;text=<%= user.message %>" target="_blank">
-                <i class="fab fa-whatsapp" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enviar Whatsapp"></i>
-              </a>
+              <%= link_to resend_message_users_path(user.id) do %>
+                <i class="fab fa-whatsapp" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Reenviar Convite"></i>
+              <% end %>
             </td>
             <td style="text-align: center;">
               <%= link_to edit_user_path(user), class: 'btn btn-secondary btn-sm' do %>

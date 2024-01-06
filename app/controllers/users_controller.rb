@@ -31,6 +31,22 @@ class UsersController < ApplicationController
     puts "Token do #{@user.name}: #{@user.token}"
   end
 
+  def resend_message
+    @user = User.find(params[:format]) if params[:format].present?
+    begin
+      return_api_whatsapp = ::SendMessage::WhatsAppApi.new(@user).resend_package_message
+
+      if return_api_whatsapp['error']
+        redirect_to users_url, notice: "#{return_api_whatsapp['error']}"
+      else
+        redirect_to users_url, notice: "Mensagem reenviada com sucesso"
+      end
+    rescue Exception => e
+      flash.now['alert'] = "Erro inesperado: #{e.message}"
+      redirect_to users_url
+    end
+  end
+
   def create
     @user = User.new(user_params)
     @user.token = SecureRandom.hex(5)
