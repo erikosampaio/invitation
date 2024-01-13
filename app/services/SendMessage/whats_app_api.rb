@@ -49,6 +49,25 @@ module SendMessage
         return { 'success' => 'Usuário criado com sucesso. Convite digital enviado.' }
       end
     end
+
+    def trigger_package_message
+      return_text_message = send_message('chat', phone_number, "body=#{body_trigger_message}")
+      return_image_message = send_message('image', phone_number, "image=#{image_url}&caption=#{caption}")
+
+      if return_text_message['error'] && return_image_message['error']
+        return { 'error' => "Erro ao enviar convite digital. Erro: #{return_text_message['error']}" }
+      end
+      
+      if return_text_message['error'] || return_image_message['error']
+        if return_text_message['error']
+          return { 'error' => "Imagem enviada com sucesso. Erro ao enviar mensagem de texto. Erro: #{return_text_message['error']}" }
+        end
+        
+        return { 'error' => "Mensagem enviada com sucesso. Erro ao enviar imagem. Erro: #{return_image_message['error']}" }
+      else
+        return { 'success' => 'Usuário criado com sucesso. Convite digital enviado.' }
+      end
+    end
   
     def send_text_message
       send_message('chat', phone_number, "body=#{body_message}")
@@ -99,6 +118,21 @@ module SendMessage
       *Sugestão de mimos:* _Kit de higiene, roupinhas, meias coloridas, mantas e cobertores, cesta de banho etc._
 
       Até breve!
+
+      Atenciosamente,
+      Nayara e Ériko Sampaio.
+    MSG
+    end
+
+    def body_trigger_message
+      <<~MSG
+      É HOOOOOOOOOOOOOOOJEEEEEEEEEEEEEEE!
+
+      O chá de fraldas do nosso Abner será hoje, a partir das 17h. Estamos muito felizes e ansiosos para te ver.
+
+      Já estamos com tudo pronto para te receber.
+
+      Até Mais tarde!
 
       Atenciosamente,
       Nayara e Ériko Sampaio.

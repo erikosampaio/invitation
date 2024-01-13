@@ -39,6 +39,12 @@
   </div>
 
   <div class="row mb-4">
+    <div class="col d-flex justify-content-begin text-left">
+      <%= link_to trigger_message_users_path, class: 'btn btn-primary', id:"capturarValor", aria_hidden:"true", data_toggle:"tooltip", data_placement:"right", title:"Disparar Mensagem de Chamada", onclick:"return confirm('Disparar chamada para os #{invited_confirmed_count(@users)} convidados confirmados?')" do %>
+        Disparar Convite <i class="fa fa-users"></i>
+      <% end %>
+    </div>
+
     <div class="col d-flex justify-content-end text-right">
       <%= link_to new_user_path, class: 'btn btn-success' do %>
         <i class="fa fa-plus"></i> Criar Convidado

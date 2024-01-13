@@ -47,6 +47,50 @@ class UsersController < ApplicationController
     end
   end
 
+  def trigger_message
+    users_remove = [
+      'Ériko',
+      'Nayara Teles',
+      'Tarciane',
+      'Marta Sampaio',
+      'Berg',
+      'Erika Jamille',
+      'Valéria',
+      'Davi e Patrícia',
+      'Emilly e Bin',
+      'Mayra e Família',
+      'Valeska e Rafael',
+      'Cláudio',
+      'Luana'
+    ]
+
+    @users = User.where(confirmed: true).where.not(name: users_remove)
+    list_ok = []
+    list_nok = []
+
+    @users.each do |user|
+      begin
+        return_api_whatsapp = ::SendMessage::WhatsAppApi.new(user).trigger_package_message
+  
+        if return_api_whatsapp['error']
+          list_nok << user.name
+        else
+          list_ok << user.name
+        end
+      rescue Exception => e
+        flash.now['alert'] = "Erro inesperado ao enviar mensagem para #{user.name}: #{e.message}"
+      end
+    end
+
+    if list_nok.blank?
+      redirect_to users_url, notice: "Mensagem enviada com sucesso para: #{list_ok.to_sentence}"
+    elsif list_ok.blank?
+      redirect_to users_url, alert: "Erro ao disparar mensagem para: #{list_ok.to_sentence}"
+    else
+      redirect_to users_url, notice: "Mensagem enviada com sucesso para #{list_ok.to_sentence}", alert: "Erro ao disparar mensagem para: #{list_nok.to_sentence}"
+    end
+  end
+
   def create
     @user = User.new(user_params)
     @user.token = SecureRandom.hex(5)

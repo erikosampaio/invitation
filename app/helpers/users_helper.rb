@@ -30,4 +30,24 @@ module UsersHelper
       "Atualizar"
     end
   end
+
+  def invited_confirmed_count(inviteds)
+    users_remove = [
+      'Ériko',
+      'Nayara Teles',
+      'Tarciane',
+      'Marta Sampaio',
+      'Berg',
+      'Erika Jamille',
+      'Valéria',
+      'Davi e Patrícia',
+      'Emilly e Bin',
+      'Mayra e Família',
+      'Valeska e Rafael',
+      'Cláudio',
+      'Luana'
+    ]
+
+    inviteds = User.where(confirmed: true).where.not(name: users_remove).count
+  end
 end
