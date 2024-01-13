@@ -48,23 +48,7 @@ class UsersController < ApplicationController
   end
 
   def trigger_message
-    users_remove = [
-      'Ériko',
-      'Nayara Teles',
-      'Tarciane',
-      'Marta Sampaio',
-      'Berg',
-      'Erika Jamille',
-      'Valéria',
-      'Davi e Patrícia',
-      'Emilly e Bin',
-      'Mayra e Família',
-      'Valeska e Rafael',
-      'Cláudio',
-      'Luana'
-    ]
-
-    @users = User.where(confirmed: true).where.not(name: users_remove)
+    @users = User.where(confirmed: true)
     list_ok = []
     list_nok = []
 

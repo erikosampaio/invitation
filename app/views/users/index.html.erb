@@ -12,9 +12,9 @@
       <div class="card bg-light mb-3">
         <div class="card-body">
           <h4 class="card-title">
-            <i class="fas fa-check-double"></i> Confirmações
+            <i class="fas fa-check-double"></i> Confirmações / Por Cadastro
           </h4>
-          <h3 class="card-text"><%= @users.where(confirmed: true).sum(:qtd_guest) rescue nil %></h3>
+          <h3 class="card-text"><%= @users.where(confirmed: true).sum(:qtd_guest)%> / <%= @users.where(confirmed: true).count rescue nil %></h3>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
 
   <div class="row mb-4">
     <div class="col d-flex justify-content-begin text-left">
-      <%= link_to trigger_message_users_path, class: 'btn btn-primary', id:"capturarValor", aria_hidden:"true", data_toggle:"tooltip", data_placement:"right", title:"Disparar Mensagem de Chamada", onclick:"return confirm('Disparar chamada para os #{invited_confirmed_count(@users)} convidados confirmados?')" do %>
+      <%= link_to trigger_message_users_path, class: 'btn btn-primary', id:"capturarValor", aria_hidden:"true", data_toggle:"tooltip", data_placement:"right", title:"Disparar Mensagem de Chamada", onclick:"return confirm('Disparar chamada para os #{@users.where(confirmed: true).count} convidados confirmados?')" do %>
         Disparar Convite <i class="fa fa-users"></i>
       <% end %>
     </div>
