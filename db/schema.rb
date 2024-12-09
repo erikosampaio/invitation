@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_151555) do
     t.integer "qtd_guest", default: 1
     t.string "responsavel"
     t.integer "qtd_expected"
-    t.string "send_qtd_expected"
+    t.string "send_qtd_expected", default: "Não"
   end
 
 end
